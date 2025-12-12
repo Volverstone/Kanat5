@@ -17,3 +17,11 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ('id', 'text', 'product')
+
+class ProductReviewsSerializer(serializers.ModelSerializer):
+    reviews = ReviewSerializer(many=True, read_only=True)
+    rating = serializers.FloatField()
+
+    class Meta:
+        model = Product
+        fields = ('id', 'title', 'description', 'price', 'category', 'rating', 'reviews')
